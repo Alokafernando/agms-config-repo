@@ -1,16 +1,22 @@
 server:
-  port: 8081
+  port: 8082
 
 spring:
   application:
-    name: zone-service
+    name: sensor-service  
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false   
 
-  datasource:
-    url: jdbc:mysql://localhost:3306/agms_sensor_db?createDatabaseIfNotExist=true
+external:
+  iot:
+    base-url: http://104.211.95.241:8080/api
     username: root
     password: 1234
 
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
+telemetry:
+  fetch-interval: 10000
+
+logging:
+  level:
+    com.agms.sensor_telemetry_service: DEBUG

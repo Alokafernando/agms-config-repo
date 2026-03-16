@@ -11,7 +11,7 @@ spring:
             - Path=/api/auth/**
 
         - id: zone-service
-          uri: lb://ZONE-MANAGEMENT-SERVICE  
+          uri: lb://ZONE-SERVICE 
           predicates:
             - Path=/api/zones/**
           filters:

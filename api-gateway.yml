@@ -16,6 +16,8 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true    
 
 # expose gateway actuator endpoints so you can see routes
 management:
@@ -24,25 +26,21 @@ management:
       exposure:
         include: health, info, gateway
 
-# Spring Cloud Gateway routes
 spring:
   cloud:
     gateway:
-
-      # route definitions
       routes:
         - id: auth-service
           uri: lb://auth-service
           predicates:
             - Path=/api/auth/**
-          # no authentication filter for register/login
 
         - id: zone-service
           uri: lb://zone-service
           predicates:
             - Path=/api/zones/**
           filters:
-            - Authentication  # matches filter class naming
+            - Authentication 
 
         - id: sensor-service
           uri: lb://sensor-service

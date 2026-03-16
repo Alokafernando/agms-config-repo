@@ -4,8 +4,17 @@ server:
 spring:
   application:
     name: automation-service
+  
+  datasource:
+    url: jdbc:mysql://localhost:3306/agms_automation_db
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
 
-# Decision Logic Thresholds
 automation:
   thresholds:
     temperature: 30.0

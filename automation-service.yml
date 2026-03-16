@@ -1,16 +1,16 @@
 server:
-  port: 8081
+  port: 8083
 
 spring:
   application:
-    name: zone-service
+    name: automation-service
 
-  datasource:
-    url: jdbc:mysql://localhost:3306/agms_automation_db?createDatabaseIfNotExist=true
-    username: root
-    password: 1234
+# Decision Logic Thresholds
+automation:
+  thresholds:
+    temperature: 30.0
+    humidity: 40.0
 
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
+logging:
+  level:
+    com.agms.automation_service: DEBUG

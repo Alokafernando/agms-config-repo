@@ -1,32 +1,59 @@
 jwt:
   secret: "a74138c70e93061c2d3d93f941e6295b88fcc694ab2d525d1c001948f6d4ee2a"
 
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  # import configuration from your config server
+  config:
+    import: "optional:configserver:http://localhost:8888"
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+# expose gateway actuator endpoints so you can see routes
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, gateway
+
+# Spring Cloud Gateway routes
 spring:
   cloud:
     gateway:
+
+      # route definitions
       routes:
         - id: auth-service
           uri: lb://auth-service
           predicates:
             - Path=/api/auth/**
+          # no authentication filter for register/login
 
         - id: zone-service
           uri: lb://zone-service
           predicates:
             - Path=/api/zones/**
           filters:
-            - AuthenticationFilter
+            - Authentication  # matches filter class naming
 
         - id: sensor-service
           uri: lb://sensor-service
           predicates:
             - Path=/api/sensors/**
           filters:
-            - AuthenticationFilter
+            - Authentication
 
         - id: crop-service
           uri: lb://crop-inventory-service
           predicates:
             - Path=/api/crops/**
           filters:
-            - AuthenticationFilter
+            - Authentication

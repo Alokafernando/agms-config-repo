@@ -5,20 +5,17 @@ spring:
   application:
     name: api-gateway
 
-  # Config server (optional)
   config:
     import: "optional:configserver:http://localhost:8888"
 
   cloud:
     gateway:
       routes:
-        # Auth service (no auth filter)
         - id: auth-service
           uri: lb://auth-service
           predicates:
             - Path=/api/auth/**
 
-        # Zone service (protected)
         - id: zone-service
           uri: lb://zone-service
           predicates:
@@ -26,7 +23,6 @@ spring:
           filters:
             - name: Authentication
 
-        # Sensor service (protected)
         - id: sensor-service
           uri: lb://sensor-service
           predicates:
@@ -34,7 +30,6 @@ spring:
           filters:
             - name: Authentication
 
-        # Crop Inventory service (protected)
         - id: crop-service
           uri: lb://crop-inventory-service
           predicates:
@@ -55,12 +50,11 @@ jwt:
   secret: "a74138c70e93061c2d3d93f941e6295b88fcc694ab2d525d1c001948f6d4ee2a"
 
 management:
-  # Enable the gateway actuator endpoint
   endpoint:
     gateway:
-      enabled: true       # allows the /gateway actuator endpoints to work
-      # access: read-only # alternative option if you want only GET access
+      enabled: true          # enable actuator for Spring Cloud Gateway
+      access: read-only      # allow GET access to /gateway/routes
   endpoints:
     web:
       exposure:
-        include: health, info, gateway   # expose the gateway endpoint over HTTP
+        include: health, info, gateway

@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: zone-management-service
+    name: zone-service
 
   datasource:
     url: jdbc:mysql://localhost:3306/agms_zone_db?createDatabaseIfNotExist=true

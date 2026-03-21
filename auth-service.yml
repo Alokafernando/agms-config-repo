@@ -1,22 +1,11 @@
 spring:
-  application:
-    name: automation-service
-  
   datasource:
-    url: jdbc:mysql://localhost:3306/agms_automation_db?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/agms_user_db?createDatabaseIfNotExist=true
     username: root
     password: 1234
-    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
 
-automation:
-  thresholds:
-    temperature: 30.0
-    humidity: 40.0
-
-logging:
-  level:
-    com.agms.automation_service: DEBUG
+jwt:
+  secret: "a74138c70e93061c2d3d93f941e6295b88fcc694ab2d525d1c001948f6d4ee2a"

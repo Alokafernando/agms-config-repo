@@ -3,37 +3,16 @@ server:
 
 spring:
   application:
-    name: sensor-service
-  config:
-    import: "optional:configserver:http://localhost:8888"
+    name: sensor-service  
   jackson:
     serialization:
-      write-dates-as-timestamps: false
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-    register-with-eureka: true
-    fetch-registry: true
-  instance:
-    prefer-ip-address: true
+      write-dates-as-timestamps: false   
 
 external:
   iot:
     base-url: http://104.211.95.241:8080/api
-    username: buddhika
+    username: root
     password: 1234
-
-auth:
-  service:
-    base-url: http://localhost:8085/api/auth
-    username: buddhika
-    password: 1234
-
-zone:
-  service:
-    base-url: http://localhost:8081
 
 telemetry:
   fetch-interval: 10000
@@ -41,4 +20,3 @@ telemetry:
 logging:
   level:
     com.agms.sensor_telemetry_service: DEBUG
-    org.springframework.cloud.loadbalancer: DEBUG
